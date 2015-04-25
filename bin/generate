@@ -14,9 +14,13 @@ if(!(fileExists("$tmpl") && fileExists("$output")))
 }
 if(fileExists("$tmpl") && fileExists("$output"))
 {
-	foreach my $mcu (@ARGV)
+#	foreach my $mcu (@ARGV)
+	foreach my $mcu (filesInDir("$tmpl"))
 	{
-		generate("${mcu}.v", "${mcu}_startup.d");
+		if($mcu =~ s/^(.*).v$/$1/)
+		{
+			generate("${mcu}.v", "${mcu}_startup.d");
+		}
 	}
 }
 else
@@ -123,6 +127,18 @@ sub entry(value,comment)
 }
 
 sub fileExists(pathname){ -e @_[0]; }
+
+sub filesInDir(pathname)
+{
+	my	($pathname) = @_;
+	my	@files;
+
+	if(opendir(DIR, "$pathname"))
+	{
+		@files = grep { -f "$pathname/$_" } readdir(DIR);
+	}
+	return(@files);
+}
 
 sub readFile(pathname){ join("", &arrayFromFile); }
 
