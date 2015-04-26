@@ -1,3 +1,10 @@
+This repository is now dead and will no longer be updated.
+The repository will be removed on or after May 15th 2015.
+Please use the MCU repository instead:
+             
+https://github.com/jens-gpio/MCU
+
+---  
 This repository contains D startup files for the LPC17xx microcontroller family.
 
 For more info about the D language, please visit dlang.org
